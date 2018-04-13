@@ -6,7 +6,7 @@ APP = game
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp) # get all .c files in the SRC_DIR
 # create corresponding object files list
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 CXXFLAGS = -g -Wall -Wextra -pedantic -ansi
 
@@ -18,7 +18,7 @@ all: directories $(APP)
 
 # link OBJECTS to the APP executable
 $(APP): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $@ $(LIBS)
+	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $@ $(LDFLAGS)
 
 directories:
 	mkdir -p $(OBJ_DIR)
