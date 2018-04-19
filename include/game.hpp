@@ -3,16 +3,25 @@
 
 #include <stack>
 #include <SFML/Graphics.hpp>
+#include "game_state.hpp"
+#include "texture_manager.hpp"
 
 class GameState;
 
 class Game {
- public:
-    std::stack<GameState*> states;
+  private:
 
-    sf::RenderWindow window;
+  void loadTextures();
 
-    void pushState(GameState* state);
+  public:
+
+  std::stack<GameState*> states;
+
+  sf::RenderWindow window;
+  TextureManager texmgr;
+  sf::Sprite background;
+
+  void pushState(GameState* state);
     void popState();
     void changeState(GameState* state);
     GameState* peekState();

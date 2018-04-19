@@ -3,8 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include "game.hpp"
-#include "game_state.hpp"
+#include "../include/game.hpp"
+#include "../include/game_state.hpp"
+#include "../include/texture_manager.hpp"
+
+void Game::loadTextures()
+{
+    texmgr.loadTexture("background", "media/background.png");
+}
 
 void Game::pushState(GameState* state) {
     this->states.push(state);
@@ -48,9 +54,14 @@ void Game::gameLoop() {
     }
 }
 
-Game::Game() {
+Game::Game()
+{
+    this->loadTextures();
+
     this->window.create(sf::VideoMode(800, 600), "City Builder");
     this->window.setFramerateLimit(60);
+
+    this->background.setTexture(this->texmgr.getRef("background"));
 }
 
 Game::~Game() {
