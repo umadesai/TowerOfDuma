@@ -1,20 +1,17 @@
-#ifndef ANIMATION_HANDLER_HPP
-#define ANIMATION_HANDLER_HPP
+#ifndef INCLUDE_ANIMATION_HANDLER_HPP_
+#define INCLUDE_ANIMATION_HANDLER_HPP_
 
-#include <SFML/Graphics.hpp>
 #include <vector>
+#include <SFML/Graphics.hpp>
 
-class Animation
-{
-    public:
-
+class Animation {
+ public:
     unsigned int startFrame;
     unsigned int endFrame;
 
     float duration;
 
-    Animation(unsigned int startFrame, unsigned int endFrame, float duration)
-    {
+    Animation(unsigned int startFrame, unsigned int endFrame, float duration) {
         this->startFrame = startFrame;
         this->endFrame = endFrame;
         this->duration = duration;
@@ -23,10 +20,8 @@ class Animation
     unsigned int getLength() { return endFrame - startFrame + 1; }
 };
 
-class AnimationHandler
-{
-    private:
-
+class AnimationHandler {
+ private:
     /* Array of animations */
     std::vector<Animation> animations;
 
@@ -35,8 +30,7 @@ class AnimationHandler
 
     int currentAnim;
 
-    public:
-
+ public:
     /* Add a new animation */
     void addAnim(Animation& anim);
 
@@ -55,13 +49,11 @@ class AnimationHandler
     sf::IntRect frameSize;
 
     /* Constructor */
-    AnimationHandler()
-    {
+    AnimationHandler() {
         this->t = 0.0f;
         this->currentAnim = -1;
     }
-    AnimationHandler(const sf::IntRect& frameSize)
-    {
+    explicit AnimationHandler(const sf::IntRect& frameSize) {
         this->frameSize = frameSize;
 
         this->t = 0.0f;
@@ -69,4 +61,4 @@ class AnimationHandler
     }
 };
 
-#endif /* ANIMATION_HANDLER_HPP */
+#endif  // INCLUDE_ANIMATION_HANDLER_HPP_

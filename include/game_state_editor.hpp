@@ -1,24 +1,21 @@
-#ifndef GAME_STATE_EDITOR_HPP
-#define GAME_STATE_EDITOR_HPP
+#ifndef INCLUDE_GAME_STATE_EDITOR_HPP_
+#define INCLUDE_GAME_STATE_EDITOR_HPP_
 
 #include <SFML/Graphics.hpp>
 
 #include "game_state.hpp"
 
-class GameStateEditor : public GameState
-{
-    private:
+class GameStateEditor : public GameState {
+ private:
+  sf::View gameView;
+  sf::View guiView;
 
-    sf::View gameView;
-    sf::View guiView;
+ public:
+  virtual void draw(const float dt);
+  virtual void update(const float dt);
+  virtual void handleInput();
 
-    public:
-
-    virtual void draw(const float dt);
-    virtual void update(const float dt);
-    virtual void handleInput();
-
-    GameStateEditor(Game* game);
+  explicit GameStateEditor(Game* game);
 };
 
-#endif /* GAME_STATE_EDITOR_HPP */
+#endif  // INCLUDE_GAME_STATE_EDITOR_HPP_

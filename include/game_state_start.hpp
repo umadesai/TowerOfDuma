@@ -1,26 +1,23 @@
-#ifndef GAME_STATE_START_HPP
-#define GAME_STATE_START_HPP
+#ifndef INCLUDE_GAME_STATE_START_HPP_
+#define INCLUDE_GAME_STATE_START_HPP_
 
 #include <SFML/Graphics.hpp>
 
 #include "game_state.hpp"
 #include "game_state_editor.hpp"
 
-class GameStateStart : public GameState
-{
-    private:
-
-    sf::View view;
+class GameStateStart : public GameState {
+ private:
+  sf::View view;
 
     void loadgame();
 
-    public:
-
+ public:
     virtual void draw(const float dt);
     virtual void update(const float dt);
     virtual void handleInput();
 
-    GameStateStart(Game* game);
+    explicit GameStateStart(Game* game);
 };
 
-#endif /* GAME_STATE_START_HPP */
+#endif  // INCLUDE_GAME_STATE_START_HPP_
