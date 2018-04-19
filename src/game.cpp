@@ -4,8 +4,6 @@
 #include <SFML/System.hpp>
 
 #include "../include/game.hpp"
-#include "../include/game_state.hpp"
-#include "../include/texture_manager.hpp"
 
 void Game::loadTextures()
 {
