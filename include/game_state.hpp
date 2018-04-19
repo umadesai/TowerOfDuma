@@ -1,10 +1,12 @@
-#ifndef INCLUDE_GAME_STATE_HPP_
-#define INCLUDE_GAME_STATE_HPP_
+#ifndef GAME_STATE_HPP
+#define GAME_STATE_HPP
 
 #include "game.hpp"
 
-class GameState{
- public:
+class GameState
+{
+    public:
+
     Game* game;
 
     virtual void draw(const float dt) = 0;
@@ -12,4 +14,4 @@ class GameState{
     virtual void handleInput() = 0;
 };
 
-#endif  // INCLUDE_GAME_STATE_HPP_
+#endif /* GAME_STATE_HPP */
