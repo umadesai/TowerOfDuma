@@ -20,7 +20,7 @@ We want to:
 
 We did some housekeeping-related things. We set up linting for our project, and wrote our Makefile. We also created a window using SFML that rendered a circle.
 
-## Currently working on
+## Current Progress
 
 We have been working through [this](https://www.binpress.com/tutorial/creating-a-city-building-game-with-sfml/137) tutorial on using SFML, and creating a game engine. We have set up a lot of classes that will help us store the Game (things like a `GameState`, a `TextureManager`, which allows us to display images/sprites to the screen, `Animation`, which allows us to animate sprites by having a sequence of images that rotates through to animate a sprite).
 
