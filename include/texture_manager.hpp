@@ -1,19 +1,16 @@
-#ifndef TEXTURE_MANAGER_HPP
-#define TEXTURE_MANAGER_HPP
+#ifndef INCLUDE_TEXTURE_MANAGER_HPP_
+#define INCLUDE_TEXTURE_MANAGER_HPP_
 
-#include <SFML/Graphics.hpp>
 #include <string>
 #include <map>
+#include <SFML/Graphics.hpp>
 
-class TextureManager
-{
-    private:
-
+class TextureManager {
+ private:
     /* Array of textures used */
     std::map<std::string, sf::Texture> textures;
 
-    public:
-
+ public:
     /* Add a texture from a file */
     void loadTexture(const std::string& name, const std::string &filename);
 
@@ -21,9 +18,8 @@ class TextureManager
     sf::Texture& getRef(const std::string& texture);
 
     /* Constructor */
-    TextureManager()
-    {
+    TextureManager() {
     }
 };
 
-#endif /* TEXTURE_MANAGER_HPP */
+#endif  // INCLUDE_TEXTURE_MANAGER_HPP_
