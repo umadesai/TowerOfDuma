@@ -21,7 +21,7 @@ We did some housekeeping-related things. We set up linting for our project, and 
 
 ## Currently working on
 
-We have been working through [this](https://www.binpress.com/tutorial/creating-a-city-building-game-with-sfml/137) tutorial on using SFML, and creating a game engine. We have set up a lot of classes that will help us store the Game (things like a `GameState`, a `TextureManage`, which allows us to display images/sprites to the screen, `Animation`, which allows us to animate sprites by having a sequence of images that rotates through to animate a sprite).
+We have been working through [this](https://www.binpress.com/tutorial/creating-a-city-building-game-with-sfml/137) tutorial on using SFML, and creating a game engine. We have set up a lot of classes that will help us store the Game (things like a `GameState`, a `TextureManager`, which allows us to display images/sprites to the screen, `Animation`, which allows us to animate sprites by having a sequence of images that rotates through to animate a sprite).
 
 ## Next Steps
 Customize our GameState to be tower-defense specific
