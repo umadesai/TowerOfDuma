@@ -8,7 +8,7 @@ SOURCES = $(wildcard $(SRC_DIR)/*.cpp) # get all .c files in the SRC_DIR
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
-CXXFLAGS = -g -Wall -Wextra -pedantic -ansi -Werror
+CXXFLAGS = -g -Wall -Wextra -pedantic -ansi -std=c++0x
 
 # all, directories are not actually files we will create
 .PHONY: all directories
