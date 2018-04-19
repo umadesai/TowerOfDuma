@@ -2,10 +2,10 @@
 set -e
 
 echo Running cpplint...
-cpplint --recursive src/
+cpplint --recursive src/ include/
 echo
 echo Running cppcheck...
 
-cppcheck --enable=all src/
+cppcheck --enable=all src/ include/
 echo
 echo Passed linters
