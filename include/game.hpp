@@ -1,5 +1,5 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#ifndef INCLUDE_GAME_HPP_
+#define INCLUDE_GAME_HPP_
 
 #include <stack>
 #include <SFML/Graphics.hpp>
@@ -8,19 +8,15 @@
 
 class GameState;
 
-class Game
-{
-	private:
+class Game {
+ private:
+  void loadTextures();
 
-	void loadTextures();
-
-    public:
-
-    std::stack<GameState*> states;
-
-    sf::RenderWindow window;
-	TextureManager texmgr;
-	sf::Sprite background;
+ public:
+  std::stack<GameState*> states;
+  sf::RenderWindow window;
+  TextureManager texmgr;
+  sf::Sprite background;
 
     void pushState(GameState* state);
     void popState();
@@ -33,4 +29,4 @@ class Game
     ~Game();
 };
 
-#endif /* GAME_HPP */
+#endif  // INCLUDE_GAME_HPP_
