@@ -4,8 +4,7 @@
 #include "game.hpp"
 
 class GameState{
-    public:
-
+ public:
     Game* game;
 
     virtual void draw(const float dt) = 0;
@@ -13,4 +12,4 @@ class GameState{
     virtual void handleInput() = 0;
 };
 
-#endif // INCLUDE_GAME_STATE_HPP_
+#endif  // INCLUDE_GAME_STATE_HPP_
