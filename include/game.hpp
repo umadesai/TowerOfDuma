@@ -1,27 +1,28 @@
-#ifndef INCLUDE_GAME_HPP_
-#define INCLUDE_GAME_HPP_
+#ifndef GAME_HPP
+#define GAME_HPP
 
 #include <stack>
 #include <SFML/Graphics.hpp>
-#include "game_state.hpp"
-#include "texture_manager.hpp"
+
+#include "../include/texture_manager.hpp"
 
 class GameState;
 
-class Game {
-  private:
+class Game
+{
+	private:
 
-  void loadTextures();
+	void loadTextures();
 
-  public:
+    public:
 
-  std::stack<GameState*> states;
+    std::stack<GameState*> states;
 
-  sf::RenderWindow window;
-  TextureManager texmgr;
-  sf::Sprite background;
+    sf::RenderWindow window;
+	TextureManager texmgr;
+	sf::Sprite background;
 
-  void pushState(GameState* state);
+    void pushState(GameState* state);
     void popState();
     void changeState(GameState* state);
     GameState* peekState();
@@ -32,4 +33,4 @@ class Game {
     ~Game();
 };
 
-#endif  // INCLUDE_GAME_HPP_
+#endif /* GAME_HPP */
