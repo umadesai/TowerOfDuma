@@ -1,5 +1,5 @@
 
-## Project Proposal for David's Tower of Duma
+## Project Update for David's Tower of Duma
 
 ## Team Members
 
