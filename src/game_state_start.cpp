@@ -1,8 +1,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "../include/game_state_start.hpp"
-#include "../include/game_state_editor.hpp"
-#include "../include/game_state.hpp"
 
 void GameStateStart::draw(const float dt)
 {
