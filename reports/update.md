@@ -7,7 +7,7 @@ Uma Desai, David Abrahams
 
 ## Goal
 
-Our goal for this project is to build a fun, engaging game in C++, using the SFML graphics library.
+Our goal for this project is to build a fun, engaging game in C++, using the SFML graphics library. We are planning to make a version of Tower Defense. Our minimum viable product is a game that allows users to place various items on towers that pop moving sprites before they make it across a road. Our stretch goal involves getting more creative with the kinds of tools and sprites that users can interact with.
 
 ## Learning Goals
 
