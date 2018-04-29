@@ -6,6 +6,6 @@ cpplint --recursive src/ include/
 echo
 echo Running cppcheck...
 
-cppcheck --enable=all src/ include/
+cppcheck --enable=all --suppress=missingIncludeSystem src/
 echo
 echo Passed linters
