@@ -4,7 +4,8 @@
 #include "../include/animation_handler.hpp"
 
 void AnimationHandler::update(const float dt) {
-  if (currentAnim >= this->animations.size() || currentAnim < 0) return;
+  if (currentAnim >= this->animations.size() || currentAnim < 0)
+    return;
 
   float duration = this->animations[currentAnim].duration;
 
@@ -34,7 +35,7 @@ void AnimationHandler::update(const float dt) {
   return;
 }
 
-void AnimationHandler::addAnim(Animation& anim) {
+void AnimationHandler::addAnim(const Animation &anim) {
   this->animations.push_back(anim);
 
   return;
@@ -44,7 +45,8 @@ void AnimationHandler::changeAnim(unsigned int animID) {
   /* Do not change the animation if the animation is currently active or
   * the new animation does not exist */
   if (this->currentAnim == animID || animID >= this->animations.size() ||
-  animID < 0) return;
+      animID < 0)
+    return;
 
   /* Set the current animation */
   this->currentAnim = animID;

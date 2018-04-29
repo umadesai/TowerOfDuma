@@ -8,60 +8,63 @@
 #include "../include/texture_manager.hpp"
 
 void Game::loadTextures() {
-    texmgr.loadTexture("background", "media/allen.jpg");
+  texmgr.loadTexture("background", "media/allen.jpg");
 }
 
-void Game::pushState(GameState* state) {
-    this->states.push(state);
+void Game::pushState(GameState *state) {
+  this->states.push(state);
 
-    return;
+  return;
 }
 
 void Game::popState() {
-    delete this->states.top();
-    this->states.pop();
+  delete this->states.top();
+  this->states.pop();
 
-    return;
+  return;
 }
 
-void Game::changeState(GameState* state) {
-    if (!this->states.empty())
-        popState();
-    pushState(state);
+void Game::changeState(GameState *state) {
+  if (!this->states.empty())
+    popState();
+  pushState(state);
 
-    return;
+  return;
 }
 
-GameState* Game::peekState() {
-    if (this->states.empty()) return nullptr;
-    return this->states.top();
+GameState *Game::peekState() {
+  if (this->states.empty())
+    return nullptr;
+  return this->states.top();
 }
 
 void Game::gameLoop() {
-    sf::Clock clock;
+  sf::Clock clock;
 
-    while (this->window.isOpen()) {
-        sf::Time elapsed = clock.restart();
-        float dt = elapsed.asSeconds();
+  while (this->window.isOpen()) {
+    sf::Time elapsed = clock.restart();
+    float dt = elapsed.asSeconds();
 
-        if (peekState() == nullptr) continue;
-        peekState()->handleInput();
-        peekState()->update(dt);
-        this->window.clear(sf::Color::Black);
-        peekState()->draw(dt);
-        this->window.display();
-    }
+    if (peekState() == nullptr)
+      continue;
+    peekState()->handleInput();
+    peekState()->update(dt);
+    this->window.clear(sf::Color::Black);
+    peekState()->draw(dt);
+    this->window.display();
+  }
 }
 
 Game::Game() {
-    this->loadTextures();
+  this->loadTextures();
 
-    this->window.create(sf::VideoMode(800, 600), "City Builder");
-    this->window.setFramerateLimit(60);
+  this->window.create(sf::VideoMode(800, 600), "City Builder");
+  this->window.setFramerateLimit(60);
 
-    this->background.setTexture(this->texmgr.getRef("background"));
+  this->background.setTexture(this->texmgr.getRef("background"));
 }
 
 Game::~Game() {
-    while (!this->states.empty()) popState();
+  while (!this->states.empty())
+    popState();
 }

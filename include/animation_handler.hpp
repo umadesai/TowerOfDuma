@@ -32,7 +32,7 @@ class AnimationHandler {
 
  public:
     /* Add a new animation */
-    void addAnim(Animation& anim);
+    void addAnim(const Animation& anim);
 
     /* Update the current frame of animation. dt is the time since
      * the update was last called (i.e. the time for one frame to be

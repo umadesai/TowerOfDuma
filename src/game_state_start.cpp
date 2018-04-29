@@ -11,53 +11,57 @@ void GameStateStart::draw(const float dt) {
   return;
 }
 
-void GameStateStart::update(const float dt) {
-}
+void GameStateStart::update(const float dt) {}
 
 void GameStateStart::handleInput() {
   sf::Event event;
 
   while (this->game->window.pollEvent(event)) {
     switch (event.type) {
-      /* Close the window */
-      case sf::Event::Closed:
-      {
-        game->window.close();
-        break;
-      }
-      /* Resize the window */
-      case sf::Event::Resized:
-      {
-        this->view.setSize(event.size.width, event.size.height);
-        this->game->background.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
-        this->game->background.setScale(
-          static_cast<float>(event.size.width) / static_cast<float>(this->game->background.getTexture()->getSize().x),
-          static_cast<float>(event.size.height) / static_cast<float>(this->game->background.getTexture()->getSize().y));
-          break;
-        }
-        case sf::Event::KeyPressed:
-        {
-          if (event.key.code == sf::Keyboard::Escape) this->game->window.close();
-          else if (event.key.code == sf::Keyboard::Space) this->loadgame();
-          break;
-        }
-        default: break;
-      }
+    /* Close the window */
+    case sf::Event::Closed: {
+      game->window.close();
+      break;
     }
-
-    return;
+    /* Resize the window */
+    case sf::Event::Resized: {
+      this->view.setSize(event.size.width, event.size.height);
+      this->game->background.setPosition(
+          this->game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
+      this->game->background.setScale(
+          static_cast<float>(event.size.width) /
+              static_cast<float>(
+                  this->game->background.getTexture()->getSize().x),
+          static_cast<float>(event.size.height) /
+              static_cast<float>(
+                  this->game->background.getTexture()->getSize().y));
+      break;
+    }
+    case sf::Event::KeyPressed: {
+      if (event.key.code == sf::Keyboard::Escape)
+        this->game->window.close();
+      else if (event.key.code == sf::Keyboard::Space)
+        this->loadgame();
+      break;
+    }
+    default:
+      break;
+    }
   }
 
-  GameStateStart::GameStateStart(Game* game) {
-    this->game = game;
-    sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
-    this->view.setSize(pos);
-    pos *= 0.5f;
-    this->view.setCenter(pos);
-  }
+  return;
+}
 
-  void GameStateStart::loadgame() {
-    this->game->pushState(new GameStateEditor(this->game));
+GameStateStart::GameStateStart(Game *game) {
+  this->game = game;
+  sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
+  this->view.setSize(pos);
+  pos *= 0.5f;
+  this->view.setCenter(pos);
+}
 
-    return;
-  }
+void GameStateStart::loadgame() {
+  this->game->pushState(new GameStateEditor(this->game));
+
+  return;
+}
