@@ -18,15 +18,15 @@ class Game {
   TextureManager texmgr;
   sf::Sprite background;
 
-    void pushState(GameState* state);
-    void popState();
-    void changeState(GameState* state);
-    GameState* peekState();
+  void pushState(GameState* state);
+  void popState();
+  void changeState(GameState* state);
+  GameState* peekState();
 
-    void gameLoop();
+  void gameLoop();
 
-    Game();
-    ~Game();
+  Game();
+  ~Game();
 };
 
 #endif  // INCLUDE_GAME_HPP_
