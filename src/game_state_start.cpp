@@ -56,6 +56,13 @@ GameStateStart::GameStateStart(Game *game) {
   this->game = game;
   sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
   this->view.setSize(pos);
+  this->game->background.setPosition(this->game->window.mapPixelToCoords(
+        sf::Vector2i(0, 0)));
+  this->game->background.setScale(
+      static_cast<float>(pos.x) / static_cast<float>(
+        this->game->background.getTexture()->getSize().x),
+      static_cast<float>(pos.y) / static_cast<float>(
+        this->game->background.getTexture()->getSize().y));
   pos *= 0.5f;
   this->view.setCenter(pos);
 }
