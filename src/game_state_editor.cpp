@@ -4,7 +4,7 @@
 
 void GameStateEditor::draw(const float dt) {
   this->game->window.clear(sf::Color::Black);
-  this->game->window.draw(this->game->background);
+  this->game->window.draw(this->game->grass);
 
   return;
 }
@@ -25,15 +25,20 @@ void GameStateEditor::handleInput() {
     case sf::Event::Resized: {
       gameView.setSize(event.size.width, event.size.height);
       guiView.setSize(event.size.width, event.size.height);
-      this->game->background.setPosition(this->game->window.mapPixelToCoords(
+      this->game->grass.setPosition(this->game->window.mapPixelToCoords(
           sf::Vector2i(0, 0), this->guiView));
-      this->game->background.setScale(
+      this->game->grass.setScale(
           static_cast<float>(event.size.width) /
               static_cast<float>(
-                  this->game->background.getTexture()->getSize().x),
+                  this->game->grass.getTexture()->getSize().x),
           static_cast<float>(event.size.height) /
               static_cast<float>(
-                  this->game->background.getTexture()->getSize().y));
+                  this->game->grass.getTexture()->getSize().y));
+      break;
+    }
+    case sf::Event::KeyPressed: {
+      if (event.key.code == sf::Keyboard::Escape)
+        this->game->window.close();
       break;
     }
     default:
@@ -49,6 +54,13 @@ GameStateEditor::GameStateEditor(Game *game) {
   sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
   this->guiView.setSize(pos);
   this->gameView.setSize(pos);
+  this->game->grass.setPosition(this->game->window.mapPixelToCoords(
+        sf::Vector2i(0, 0)));
+  this->game->grass.setScale(
+      static_cast<float>(pos.x) / static_cast<float>(
+        this->game->grass.getTexture()->getSize().x),
+      static_cast<float>(pos.y) / static_cast<float>(
+        this->game->grass.getTexture()->getSize().y));
   pos *= 0.5f;
   this->guiView.setCenter(pos);
   this->gameView.setCenter(pos);

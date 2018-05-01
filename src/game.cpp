@@ -9,6 +9,7 @@
 
 void Game::loadTextures() {
   texmgr.loadTexture("background", "media/allen.jpg");
+  texmgr.loadTexture("grass", "media/grass.jpg");
 }
 
 void Game::pushState(GameState *state) {
@@ -58,10 +59,11 @@ void Game::gameLoop() {
 Game::Game() {
   this->loadTextures();
 
-  this->window.create(sf::VideoMode(800, 600), "City Builder");
+  this->window.create(sf::VideoMode(800, 600), "David's Tower of Duma");
   this->window.setFramerateLimit(60);
 
   this->background.setTexture(this->texmgr.getRef("background"));
+  this->grass.setTexture(this->texmgr.getRef("grass"));
 }
 
 Game::~Game() {
