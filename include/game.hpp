@@ -17,6 +17,7 @@ class Game {
   sf::RenderWindow window;
   TextureManager texmgr;
   sf::Sprite background;
+  sf::Sprite grass;
 
   void pushState(GameState* state);
   void popState();
