@@ -6,9 +6,10 @@ class Waypoint {
  private:
     int x;
     int y;
-    Waypoint *next;
  public:
+    Waypoint *next;
     Waypoint(int x, int y, Waypoint *next);
+    Waypoint(int x, int y);
     ~Waypoint();
 };
 
