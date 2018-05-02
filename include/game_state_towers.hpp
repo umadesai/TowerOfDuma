@@ -4,10 +4,13 @@
 #include <SFML/Graphics.hpp>
 
 #include "game_state.hpp"
+#include "map.hpp"
+
 
 class GameStateTowers : public GameState {
  private:
   sf::View gameView;
+  Map *map;
 
  public:
   virtual void draw(const float dt);
