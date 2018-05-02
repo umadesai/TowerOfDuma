@@ -7,7 +7,7 @@
 
 class GameStateTowers : public GameState {
  private:
-  sf::View guiView;
+  sf::View gameView;
 
  public:
   virtual void draw(const float dt);
