@@ -1,9 +1,6 @@
 
 
 #include "../include/map.hpp"
-#include "../include/tower.hpp"
-#include "../include/enemy.hpp"
-#include "../include/waypoint.hpp"
 
 Map::Map(std::vector<Tower> towers, std::vector<Enemy> enemies, Waypoint *start)
       : towers(towers), enemies(enemies), start(start) {
