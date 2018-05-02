@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "../include/tower.hpp"
 
 Tower::Tower(int firerate, int damage, int range, int x, int y)
