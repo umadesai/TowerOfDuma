@@ -1,17 +1,18 @@
 #include <SFML/Graphics.hpp>
 
-#include "../include/game_state_editor.hpp"
+#include "../include/game_state_towers.hpp"
 
-void GameStateEditor::draw(const float dt) {
+void GameStateTowers::draw(const float dt) {
+  this->game->window.setView(this->guiView);
   this->game->window.clear(sf::Color::Black);
   this->game->window.draw(this->game->background);
 
   return;
 }
 
-void GameStateEditor::update(const float dt) { return; }
+void GameStateTowers::update(const float dt) { return; }
 
-void GameStateEditor::handleInput() {
+void GameStateTowers::handleInput() {
   sf::Event event;
 
   while (this->game->window.pollEvent(event)) {
@@ -23,8 +24,7 @@ void GameStateEditor::handleInput() {
     }
     /* Resize the window */
     case sf::Event::Resized: {
-      gameView.setSize(event.size.width, event.size.height);
-      guiView.setSize(event.size.width, event.size.height);
+      this->guiView.setSize(event.size.width, event.size.height);
       this->game->background.setPosition(this->game->window.mapPixelToCoords(
           sf::Vector2i(0, 0), this->guiView));
       this->game->background.setScale(
@@ -44,12 +44,10 @@ void GameStateEditor::handleInput() {
   return;
 }
 
-GameStateEditor::GameStateEditor(Game *game) {
+GameStateTowers::GameStateTowers(Game *game) {
   this->game = game;
   sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
   this->guiView.setSize(pos);
-  this->gameView.setSize(pos);
   pos *= 0.5f;
   this->guiView.setCenter(pos);
-  this->gameView.setCenter(pos);
 }

@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "game_state.hpp"
-#include "game_state_editor.hpp"
+#include "game_state_towers.hpp"
 
 class GameStateStart : public GameState {
  private:

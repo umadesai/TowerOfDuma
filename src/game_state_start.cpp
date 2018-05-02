@@ -68,7 +68,7 @@ GameStateStart::GameStateStart(Game *game) {
 }
 
 void GameStateStart::loadgame() {
-  this->game->pushState(new GameStateEditor(this->game));
+  this->game->pushState(new GameStateTowers(this->game));
 
   return;
 }
