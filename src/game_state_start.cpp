@@ -27,7 +27,7 @@ void GameStateStart::handleInput() {
     case sf::Event::Resized: {
       this->view.setSize(event.size.width, event.size.height);
       this->game->background.setPosition(
-          this->game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
+          this->game->window.mapPixelToCoords(sf::Vector2i(0, 0), this->view));
       this->game->background.setScale(
           static_cast<float>(event.size.width) /
               static_cast<float>(
