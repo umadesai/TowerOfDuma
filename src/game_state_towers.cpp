@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "../include/game_state_towers.hpp"
@@ -6,6 +7,7 @@ void GameStateTowers::draw(const float dt) {
   this->game->window.setView(this->gameView);
   this->game->window.clear(sf::Color::Black);
   this->game->window.draw(this->game->grass);
+  map->draw(&this->game->window, map->start);
 
   return;
 }
@@ -41,6 +43,16 @@ void GameStateTowers::handleInput() {
         this->game->window.close();
       break;
     }
+    case sf::Event::MouseButtonPressed: {
+      if (event.mouseButton.button == sf::Mouse::Left) {
+        // print mouse click positions in pixels, absolute
+        std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+        std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+        int x = event.mouseButton.x;
+        int y = event.mouseButton.y;
+        this->map->addTower(x, y);
+      }
+    }
     default:
       break;
     }
@@ -62,4 +74,8 @@ GameStateTowers::GameStateTowers(Game *game) {
         this->game->grass.getTexture()->getSize().y));
   pos *= 0.5f;
   this->gameView.setCenter(pos);
+  std::vector<Tower> towers;
+  std::vector<Enemy> enemies;
+  Waypoint *start = new Waypoint(1, 1);
+  this->map = new Map(towers, enemies, start);
 }
