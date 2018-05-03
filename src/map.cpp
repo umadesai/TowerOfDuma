@@ -45,6 +45,13 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
     shape.setPosition(tower.x - radius, tower.y - radius);
     window->draw(shape);
   }
+  for (auto enemy : this->enemies) {
+    int radius = 10;
+    sf::CircleShape shape(radius);
+    shape.setFillColor(sf::Color(0, 0, 200));  // blue
+    shape.setPosition(enemy->x - radius, enemy->y - radius);
+    window->draw(shape);
+  }
 }
 
 void Map::addTower(int x, int y) {
@@ -53,8 +60,30 @@ void Map::addTower(int x, int y) {
   std::cout << "new tower!" << std::endl;
 }
 
-Map::Map(std::vector<Tower> towers, std::vector<Enemy> enemies, Waypoint *start)
-: towers(towers), enemies(enemies), start(start) {
+void Map::update(const float dt) {
+  // spawn a new enemy randomly
+  float spawnRate = 1;  // enemy per second
+  float r = static_cast<double>(rand()) / RAND_MAX;
+  if (r < dt / spawnRate) {
+    Enemy* e = new Enemy(100, 300, "", this->start->next,
+        this->start->x, this->start->y);
+    this->enemies.push_back(e);
+  }
+  // advance all enemies, and remove ones that have reached the end
+  std::vector<Enemy*>::iterator it = enemies.begin();
+  while (it != enemies.end()) {
+    Enemy *enemy = *it;
+    if (enemy->move(dt)) {
+      delete enemy;
+      it = this->enemies.erase(it);
+    } else {
+      ++it;
+    }
+  }
+}
+
+Map::Map(std::vector<Tower> towers, std::vector<Enemy*> enemies,
+    Waypoint *start) : towers(towers), enemies(enemies), start(start) {
   Waypoint *curr = start;
   Waypoint *next = new Waypoint(650, 50);
   curr->next = next;

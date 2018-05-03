@@ -3,6 +3,7 @@
 
 #include "../include/game_state_towers.hpp"
 
+
 void GameStateTowers::draw(const float dt) {
   this->game->window.setView(this->gameView);
   this->game->window.clear(sf::Color::Black);
@@ -12,7 +13,10 @@ void GameStateTowers::draw(const float dt) {
   return;
 }
 
-void GameStateTowers::update(const float dt) { return; }
+void GameStateTowers::update(const float dt) {
+  this->map->update(dt);
+  return;
+}
 
 void GameStateTowers::handleInput() {
   sf::Event event;
@@ -75,7 +79,7 @@ GameStateTowers::GameStateTowers(Game *game) {
   pos *= 0.5f;
   this->gameView.setCenter(pos);
   std::vector<Tower> towers;
-  std::vector<Enemy> enemies;
+  std::vector<Enemy*> enemies;
   Waypoint *start = new Waypoint(0, 50);
   this->map = new Map(towers, enemies, start);
 }

@@ -6,7 +6,7 @@ Waypoint::Waypoint(int x, int y, Waypoint *next)
 {}
 
 Waypoint::Waypoint(int x, int y)
-         : x(x), y(y)
+         : x(x), y(y), next(nullptr)
 {}
 
 
