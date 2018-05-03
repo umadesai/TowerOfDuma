@@ -11,12 +11,14 @@ class Enemy {
     int speed;
     std::string spriteName;
     Waypoint *next;  // waypoint enemy is currently navigating toward
-    int x;  // store center of enemy in x, y coordinates
-    int y;
  public:
-    Enemy(int health, int speed, std::string spriteName, Waypoint *next, int x,
-        int y);
+    Enemy(int health, int speed, std::string spriteName, Waypoint *next,
+        float x, float y);
     ~Enemy();
+    float x;  // store center of enemy in x, y coordinates
+    float y;
+    bool move(const float dt);  // returns true if the enemy has reached its
+                                // goal
 };
 
 #endif  // INCLUDE_ENEMY_HPP_
