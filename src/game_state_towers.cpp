@@ -76,6 +76,6 @@ GameStateTowers::GameStateTowers(Game *game) {
   this->gameView.setCenter(pos);
   std::vector<Tower> towers;
   std::vector<Enemy> enemies;
-  Waypoint *start = new Waypoint(1, 1);
+  Waypoint *start = new Waypoint(0, 50);
   this->map = new Map(towers, enemies, start);
 }
