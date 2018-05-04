@@ -56,8 +56,17 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
 
 void Map::addTower(int x, int y) {
   Tower t(1, 1, 50, x, y);
+  Waypoint *w1 = start;
+  Waypoint *w2 = start->next;
+  while (w2) {
+    if (!t.isLegal(w1, w2)) {
+      std::cout << "ILLEGAL TOWER" << std::endl;
+      return;
+    }
+    w1 = w2;
+    w2 = w2->next;
+  }
   this->towers.push_back(t);
-  std::cout << "new tower!" << std::endl;
 }
 
 void Map::update(const float dt) {
