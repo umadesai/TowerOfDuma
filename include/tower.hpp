@@ -1,3 +1,4 @@
+#include "./waypoint.hpp"
 
 #ifndef INCLUDE_TOWER_HPP_
 #define INCLUDE_TOWER_HPP_
@@ -13,6 +14,7 @@ class Tower {
     ~Tower();
     int x;
     int y;
+    bool isLegal(Waypoint *w1, Waypoint *w2);
 };
 
 #endif  // INCLUDE_TOWER_HPP_
