@@ -1,3 +1,6 @@
+
+#include <iostream>
+#include <SFML/System.hpp>
 #include "./waypoint.hpp"
 
 #ifndef INCLUDE_TOWER_HPP_
@@ -5,16 +8,17 @@
 
 class Tower {
  private:
-    int firerate;
     int damage;
-    int range;
  public:
     // constructor and destructor
-    Tower(int firerate, int damage, int range, int x, int y);
+    Tower(float firerate, int damage, int range, int x, int y);
     ~Tower();
     int x;
     int y;
+    int range;
+    float firerate;
     bool isLegal(Waypoint *w1, Waypoint *w2);
+    // bool canShoot(sf::Clock& newClock);
 };
 
 #endif  // INCLUDE_TOWER_HPP_
