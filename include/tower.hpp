@@ -18,7 +18,6 @@ class Tower {
     int range;
     float firerate;
     bool isLegal(Waypoint *w1, Waypoint *w2);
-    // bool canShoot(sf::Clock& newClock);
 };
 
 #endif  // INCLUDE_TOWER_HPP_
