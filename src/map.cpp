@@ -79,20 +79,14 @@ void Map::update(const float dt) {
           if (et >= tower.firerate) {
             int health = enemy->health;
             std::cout << "SHOT! Health: " << enemy->health << std::endl;
-            if (true) {
+            if (health < 101) {
               delete enemy;
               it = this->enemies.erase(it);
               std::cout << "Enemy destroyed!" << std::endl;
-              newClock.restart();
-              sf::Time elapsed = newClock.getElapsedTime();
-              float et = elapsed.asSeconds();
-              // std::cout << "elapsed: " << et << std::endl;
+              // newClock.restart();
             } else {
               enemy->health = health - 20;
-              newClock.restart();
-              sf::Time elapsed = newClock.getElapsedTime();
-              float et = elapsed.asSeconds();
-              // std::cout << "elapsed: " << et << std::endl;
+              // newClock.restart();
             }
           }
         }
