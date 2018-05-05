@@ -4,25 +4,21 @@
 #include "../include/map.hpp"
 
 void Map::draw(sf::RenderWindow *window, Waypoint *start) {
-  Waypoint *curr = start;
-  sf::VertexArray lines(sf::LinesStrip, 9);
-  lines[0].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[1].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[2].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[3].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[4].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[5].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[6].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[7].position = sf::Vector2f(curr->x, curr->y);
-  curr = curr->next;
-  lines[8].position = sf::Vector2f(curr->x, curr->y);
+  // count the number of waypoints
+  Waypoint *curr = this->start;
+  int numWaypoints = 0;
+  while (curr) {
+    curr = curr->next;
+    numWaypoints++;
+  }
+  curr = this->start;
+  // create VertexArray of correct size
+  sf::VertexArray lines(sf::LinesStrip, numWaypoints);
+  // draw all the waypoint lines
+  for (int i = 0; i < numWaypoints; i++) {
+    lines[i].position = sf::Vector2f(curr->x, curr->y);
+    curr = curr->next;
+  }
   window->draw(lines);
 
   for (auto tower : this->towers) {
