@@ -38,7 +38,7 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
 }
 
 void Map::addTower(int x, int y) {
-  Tower t(1, 1, 50, x, y);
+  Tower t(0.000003, 1, 50, x, y);
   Waypoint *w1 = start;
   Waypoint *w2 = start->next;
   while (w2) {
@@ -63,8 +63,41 @@ void Map::update(const float dt) {
   }
   // advance all enemies, and remove ones that have reached the end
   std::vector<Enemy*>::iterator it = enemies.begin();
+  sf::Clock newClock;
   while (it != enemies.end()) {
     Enemy *enemy = *it;
+    for (auto tower : this->towers) {
+      double a = enemy->x - tower.x;
+      double b = enemy->y - tower.y;
+      double dist =  sqrt((a * a) + (b * b));
+      if (dist <= tower.range) {
+        if (enemy != NULL) {
+          sf::Time elapsed = newClock.getElapsedTime();
+          float et = elapsed.asSeconds();
+          std::cout << "firerate: " << tower.firerate << std::endl;
+          std::cout << "et: " << et << std::endl;
+          if (et >= tower.firerate) {
+            int health = enemy->health;
+            std::cout << "SHOT! Health: " << enemy->health << std::endl;
+            if (true) {
+              delete enemy;
+              it = this->enemies.erase(it);
+              std::cout << "Enemy destroyed!" << std::endl;
+              newClock.restart();
+              sf::Time elapsed = newClock.getElapsedTime();
+              float et = elapsed.asSeconds();
+              // std::cout << "elapsed: " << et << std::endl;
+            } else {
+              enemy->health = health - 20;
+              newClock.restart();
+              sf::Time elapsed = newClock.getElapsedTime();
+              float et = elapsed.asSeconds();
+              // std::cout << "elapsed: " << et << std::endl;
+            }
+          }
+        }
+      }
+    }
     if (enemy->move(dt)) {
       delete enemy;
       it = this->enemies.erase(it);

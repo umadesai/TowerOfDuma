@@ -7,7 +7,6 @@
 
 class Enemy {
  private:
-    int health;
     int speed;
     std::string spriteName;
     Waypoint *next;  // waypoint enemy is currently navigating toward
@@ -17,6 +16,7 @@ class Enemy {
     ~Enemy();
     float x;  // store center of enemy in x, y coordinates
     float y;
+    int health;
     bool move(const float dt);  // returns true if the enemy has reached its
                                 // goal
 };

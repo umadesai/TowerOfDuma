@@ -1,4 +1,6 @@
 #include <math.h>
+// #include <iostream>
+// #include <SFML/System.hpp>
 #include "../include/tower.hpp"
 
 double dist(double x1, double y1, double x2, double y2) {
@@ -7,13 +9,21 @@ double dist(double x1, double y1, double x2, double y2) {
   return sqrt((a * a) + (b * b));
 }
 
-Tower::Tower(int firerate, int damage, int range, int x, int y)
+Tower::Tower(float firerate, int damage, int range, int x, int y)
       : firerate(firerate), damage(damage), range(range), x(x), y(y)
 {}
 
 
 Tower::~Tower()
 {}
+
+// bool Tower::canShoot(sf::Clock& newClock) {
+//   sf::Time elapsed = newClock.getElapsedTime();
+//   float et = elapsed.asSeconds();
+//   std::cout << "elapsed: " << et << std::endl;
+//   if (et < firerate) return false;
+//   return true;
+// }
 
 bool Tower::isLegal(Waypoint *w1, Waypoint *w2) {
   int radius = 20;
