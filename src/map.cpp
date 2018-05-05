@@ -83,10 +83,10 @@ void Map::update(const float dt) {
               delete enemy;
               it = this->enemies.erase(it);
               std::cout << "Enemy destroyed!" << std::endl;
-              // newClock.restart();
+              newClock.restart();
             } else {
               enemy->health = health - 20;
-              // newClock.restart();
+              newClock.restart();
             }
           }
         }
