@@ -66,6 +66,7 @@ void Map::update(const float dt) {
   sf::Clock newClock;
   while (it != enemies.end()) {
     Enemy *enemy = *it;
+    // check for enemies in range of a tower
     for (auto tower : this->towers) {
       double a = enemy->x - tower.x;
       double b = enemy->y - tower.y;
@@ -74,11 +75,14 @@ void Map::update(const float dt) {
         if (enemy != NULL) {
           sf::Time elapsed = newClock.getElapsedTime();
           float et = elapsed.asSeconds();
-          std::cout << "firerate: " << tower.firerate << std::endl;
-          std::cout << "et: " << et << std::endl;
+          // std::cout << "firerate: " << tower.firerate << std::endl;
+          // std::cout << "et: " << et << std::endl;
+
+          // FIX THIS ---> check if enough time has elapsed since last shot
           if (et >= tower.firerate) {
             int health = enemy->health;
             std::cout << "SHOT! Health: " << enemy->health << std::endl;
+            // check enemy health
             if (health < 101) {
               delete enemy;
               it = this->enemies.erase(it);
