@@ -6,7 +6,12 @@ void GameStateStart::draw(const float dt) {
   this->game->window.setView(this->view);
 
   this->game->window.clear(sf::Color::Black);
-  this->game->window.draw(this->game->background);
+  sf::Font font;
+  font.loadFromFile("fonts/arial.ttf");
+  sf::Text text("Press Space to Begin Game", font, 30);
+  text.setPosition(sf::Vector2f(200, 275));
+  text.setColor(sf::Color::White);
+  this->game->window.draw(text);
 
   return;
 }
@@ -26,15 +31,6 @@ void GameStateStart::handleInput() {
     /* Resize the window */
     case sf::Event::Resized: {
       this->view.setSize(event.size.width, event.size.height);
-      this->game->background.setPosition(
-          this->game->window.mapPixelToCoords(sf::Vector2i(0, 0), this->view));
-      this->game->background.setScale(
-          static_cast<float>(event.size.width) /
-              static_cast<float>(
-                  this->game->background.getTexture()->getSize().x),
-          static_cast<float>(event.size.height) /
-              static_cast<float>(
-                  this->game->background.getTexture()->getSize().y));
       break;
     }
     case sf::Event::KeyPressed: {
@@ -56,13 +52,6 @@ GameStateStart::GameStateStart(Game *game) {
   this->game = game;
   sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
   this->view.setSize(pos);
-  this->game->background.setPosition(this->game->window.mapPixelToCoords(
-        sf::Vector2i(0, 0)));
-  this->game->background.setScale(
-      static_cast<float>(pos.x) / static_cast<float>(
-        this->game->background.getTexture()->getSize().x),
-      static_cast<float>(pos.y) / static_cast<float>(
-        this->game->background.getTexture()->getSize().y));
   pos *= 0.5f;
   this->view.setCenter(pos);
 }

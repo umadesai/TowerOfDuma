@@ -90,7 +90,6 @@ void Map::update(const float dt) {
           if (et >= 1/tower->firerate && enemy->health > 0) {
             enemy->health = std::max(0, enemy->health - tower->damage);
             tower->lastShot = totalTime;
-            std::cout << "SHOT!" << std::endl;
             // create a new shot object
             Shot s(tower->x, tower->y, enemy->x, enemy->y, totalTime);
             this->shots.push_back(s);
