@@ -8,7 +8,6 @@
 #include "../include/texture_manager.hpp"
 
 void Game::loadTextures() {
-  texmgr.loadTexture("background", "media/allen.jpg");
 }
 
 void Game::pushState(GameState *state) {
@@ -60,8 +59,6 @@ Game::Game() {
 
   this->window.create(sf::VideoMode(800, 600), "David's Tower of Duma");
   this->window.setFramerateLimit(60);
-
-  this->background.setTexture(this->texmgr.getRef("background"));
 }
 
 Game::~Game() {
