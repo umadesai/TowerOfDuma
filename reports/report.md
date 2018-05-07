@@ -15,7 +15,7 @@ We worked through the first 3 steps of [this](https://www.binpress.com/tutorial/
 
 ## What We Accomplished
 
-  - We create our own version of tower defense, called David’s Tower of dUma. Here are some of its main features:
+We created our own version of tower defense, called David’s Tower of dUma. Here are some of its main features:
   - Enemies randomly spawn and move along a path
   - Players can place towers everywhere except the path
   - Towers shoot enemies within range and at a set fire rate
