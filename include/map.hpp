@@ -7,6 +7,8 @@
 #include "../include/tower.hpp"
 #include "../include/enemy.hpp"
 #include "../include/waypoint.hpp"
+#include "../include/shot.hpp"
+#include "../include/sf_line.hpp"
 
 class Map {
  private:
@@ -19,6 +21,7 @@ class Map {
         Waypoint *start);
     void addTower(int x, int y);
     std::vector<Enemy*> enemies;
+    std::vector<Shot> shots;
     void update(const float dt);
     ~Map();
 };
