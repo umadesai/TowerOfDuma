@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "../include/map.hpp"
+#include "../include/game_state_start.hpp"
 
 void Map::draw(sf::RenderWindow *window, Waypoint *start) {
   // count the number of waypoints
@@ -49,7 +50,8 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
         sf::Color::Red, 5.0f);
     window->draw(line);
   }
-  sf::Text text("Dollars left: $ " + std::to_string(currency), font, 20);
+  sf::Text text("Dollars left: $ " + std::to_string(currency) +
+      "\nLives left: " + std::to_string(lives), font, 20);
   text.setPosition(sf::Vector2f(610, 20));
   text.setColor(sf::Color::White);
   window->draw(text);
@@ -113,6 +115,13 @@ void Map::update(const float dt) {
       if (enemy->health == 0) {
         currency += 1;
       }
+      if (enemy->health > 0) {
+        if (lives < 2) {
+          this->game->changeState(new GameStateStart(this->game));
+        }
+        lives--;
+        std::cout << "lives left: " << lives << std::endl;
+      }
       delete enemy;
       it = this->enemies.erase(it);
     } else {
@@ -131,8 +140,8 @@ void Map::update(const float dt) {
 }
 
 Map::Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
-    Waypoint *start) : towers(towers), enemies(enemies), start(start),
-    totalTime(0), currency(20) {
+    Waypoint *start, Game* game) : towers(towers), enemies(enemies),
+    start(start), totalTime(0), lives(3), game(game), currency(20) {
   Waypoint *curr = start;
   Waypoint *next = new Waypoint(575, 50);
   curr->next = next;
