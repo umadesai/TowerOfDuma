@@ -7,16 +7,16 @@
 #define INCLUDE_TOWER_HPP_
 
 class Tower {
- private:
-    int damage;
  public:
     // constructor and destructor
     Tower(float firerate, int damage, int range, int x, int y);
     ~Tower();
     int x;
     int y;
+    int damage;
     int range;
     float firerate;
+    float lastShot;
     bool isLegal(Waypoint *w1, Waypoint *w2);
 };
 

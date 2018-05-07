@@ -10,11 +10,12 @@
 
 class Map {
  private:
-    std::vector<Tower> towers;
+    std::vector<Tower*> towers;
  public:
     Waypoint *start;
+    float totalTime;
     void draw(sf::RenderWindow *window, Waypoint *start);
-    Map(std::vector<Tower> towers, std::vector<Enemy*> enemies,
+    Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
         Waypoint *start);
     void addTower(int x, int y);
     std::vector<Enemy*> enemies;
