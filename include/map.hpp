@@ -9,16 +9,19 @@
 #include "../include/waypoint.hpp"
 #include "../include/shot.hpp"
 #include "../include/sf_line.hpp"
+#include "../include/game.hpp"
 
 class Map {
  private:
     std::vector<Tower*> towers;
  public:
+    Game* game;
     Waypoint *start;
+    int lives;
     float totalTime;
     void draw(sf::RenderWindow *window, Waypoint *start);
     Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
-        Waypoint *start);
+        Waypoint *start, Game* game);
     void addTower(int x, int y);
     std::vector<Enemy*> enemies;
     std::vector<Shot> shots;

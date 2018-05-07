@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "../include/map.hpp"
+#include "../include/game_state_start.hpp"
 
 void Map::draw(sf::RenderWindow *window, Waypoint *start) {
   // count the number of waypoints
@@ -72,7 +73,7 @@ void Map::update(const float dt) {
   float spawnRate = 2;  // enemy per second
   float r = static_cast<double>(rand()) / RAND_MAX;
   if (r < dt * spawnRate) {
-    Enemy* e = new Enemy(100, 100, "", this->start->next,
+    Enemy* e = new Enemy(100, 500, "", this->start->next,
         this->start->x, this->start->y);
     this->enemies.push_back(e);
   }
@@ -98,6 +99,13 @@ void Map::update(const float dt) {
       }
     }
     if (enemy->health == 0 || enemy->move(dt)) {
+      if (enemy->health > 0) {
+        if (lives < 2) {
+          this->game->changeState(new GameStateStart(this->game));
+        }
+        lives--;
+        std::cout << "lives left: " << lives << std::endl;
+      }
       delete enemy;
       it = this->enemies.erase(it);
     } else {
@@ -116,8 +124,8 @@ void Map::update(const float dt) {
 }
 
 Map::Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
-    Waypoint *start) : towers(towers), enemies(enemies), start(start),
-    totalTime(0) {
+    Waypoint *start, Game* game) : towers(towers), enemies(enemies),
+    start(start), totalTime(0), lives(3), game(game) {
   Waypoint *curr = start;
   Waypoint *next = new Waypoint(650, 50);
   curr->next = next;

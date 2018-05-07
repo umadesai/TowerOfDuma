@@ -64,5 +64,5 @@ GameStateTowers::GameStateTowers(Game *game) {
   std::vector<Tower*> towers;
   std::vector<Enemy*> enemies;
   Waypoint *start = new Waypoint(0, 50);
-  this->map = new Map(towers, enemies, start);
+  this->map = new Map(towers, enemies, start, this->game);
 }
