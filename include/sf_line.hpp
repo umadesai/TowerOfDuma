@@ -9,8 +9,8 @@ class sfLine : public sf::Drawable {
         sf::Color color, float thickness);
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     sf::Color color;
-    float thickness;
  private:
+    float thickness;
     sf::Vertex vertices[4];
 };
 
