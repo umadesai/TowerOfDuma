@@ -49,27 +49,40 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
         sf::Color::Red, 5.0f);
     window->draw(line);
   }
+  sf::Text text("Dollars left: $ " + std::to_string(currency), font, 20);
+  text.setPosition(sf::Vector2f(610, 20));
+  text.setColor(sf::Color::White);
+  window->draw(text);
 }
 
 void Map::addTower(int x, int y) {
   Tower *t = new Tower(2, 30, 100, x, y);
+  for (auto tower : this->towers) {
+    int radius = 25;
+    double a = x - tower->x;
+    double b = y - tower->y;
+    double d = sqrt((a * a) + (b * b));
+    if (d <= 50) {
+      return;
+    }
+  }
   Waypoint *w1 = start;
   Waypoint *w2 = start->next;
   while (w2) {
-    if (!t->isLegal(w1, w2)) {
-      std::cout << "ILLEGAL TOWER" << std::endl;
+    if (currency < 10 || !t->isLegal(w1, w2)) {
       return;
     }
     w1 = w2;
     w2 = w2->next;
   }
+  currency -= 10;
   this->towers.push_back(t);
 }
 
 void Map::update(const float dt) {
   totalTime+=dt;
   // spawn a new enemy randomly
-  float spawnRate = 2;  // enemy per second
+  float spawnRate = 2 + totalTime / 33.0;  // enemy per second
   float r = static_cast<double>(rand()) / RAND_MAX;
   if (r < dt * spawnRate) {
     Enemy* e = new Enemy(100, 100, "", this->start->next,
@@ -97,6 +110,9 @@ void Map::update(const float dt) {
       }
     }
     if (enemy->health == 0 || enemy->move(dt)) {
+      if (enemy->health == 0) {
+        currency += 1;
+      }
       delete enemy;
       it = this->enemies.erase(it);
     } else {
@@ -116,12 +132,12 @@ void Map::update(const float dt) {
 
 Map::Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
     Waypoint *start) : towers(towers), enemies(enemies), start(start),
-    totalTime(0) {
+    totalTime(0), currency(20) {
   Waypoint *curr = start;
-  Waypoint *next = new Waypoint(650, 50);
+  Waypoint *next = new Waypoint(575, 50);
   curr->next = next;
   curr = curr->next;
-  Waypoint *next1 = new Waypoint(650, 200);
+  Waypoint *next1 = new Waypoint(575, 200);
   curr->next = next1;
   curr = curr->next;
   Waypoint *next2 = new Waypoint(50, 200);
@@ -142,6 +158,7 @@ Map::Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
   Waypoint *next7 = new Waypoint(150, 600);
   curr->next = next7;
   curr = curr->next;
+  font.loadFromFile("fonts/arial.ttf");
 }
 
 
