@@ -23,27 +23,32 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
   window->draw(lines);
 
   for (auto tower : this->towers) {
-    int radius = 20;
+    int radius = 25;
     sf::CircleShape shape(radius);
     shape.setFillColor(sf::Color(255, 0, 50));  // red
     shape.setPosition(tower->x - radius, tower->y - radius);
+    sf::CircleShape outline(tower->range);
+    outline.setFillColor(sf::Color(250, 150, 100, 50));  // orange
+    outline.setPosition(tower->x - tower->range, tower->y - tower->range);
     window->draw(shape);
+    window->draw(outline);
   }
   for (auto enemy : this->enemies) {
-    int radius = 10;
+    int radius = 8 * (enemy->health / 100.0) + 7;
     sf::CircleShape shape(radius);
     shape.setFillColor(sf::Color(0, 0, 200));  // blue
     shape.setPosition(enemy->x - radius, enemy->y - radius);
     window->draw(shape);
   }
   for (auto shot : this->shots) {
-    sfLine line(sf::Vector2f(shot.x1, shot.y1), sf::Vector2f(shot.x2, shot.y2), sf::Color::Red);
+    sfLine line(sf::Vector2f(shot.x1, shot.y1), sf::Vector2f(shot.x2, shot.y2),
+        sf::Color::Red);
     window->draw(line);
   }
 }
 
 void Map::addTower(int x, int y) {
-  Tower *t = new Tower(1, 100, 50, x, y);
+  Tower *t = new Tower(2, 30, 100, x, y);
   Waypoint *w1 = start;
   Waypoint *w2 = start->next;
   while (w2) {
@@ -60,10 +65,10 @@ void Map::addTower(int x, int y) {
 void Map::update(const float dt) {
   totalTime+=dt;
   // spawn a new enemy randomly
-  float spawnRate = 3;  // enemy per second
+  float spawnRate = 2;  // enemy per second
   float r = static_cast<double>(rand()) / RAND_MAX;
   if (r < dt * spawnRate) {
-    Enemy* e = new Enemy(100, 300, "", this->start->next,
+    Enemy* e = new Enemy(100, 100, "", this->start->next,
         this->start->x, this->start->y);
     this->enemies.push_back(e);
   }
