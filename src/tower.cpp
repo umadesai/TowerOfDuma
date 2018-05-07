@@ -9,7 +9,8 @@ double dist(double x1, double y1, double x2, double y2) {
 }
 
 Tower::Tower(float firerate, int damage, int range, int x, int y)
-      : firerate(firerate), damage(damage), range(range), x(x), y(y), lastShot(-INFINITY)
+      : firerate(firerate), damage(damage), range(range), x(x), y(y),
+      lastShot(-INFINITY)
 {}
 
 

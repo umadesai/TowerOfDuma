@@ -39,8 +39,6 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
 }
 
 void Map::addTower(int x, int y) {
-  std::cout << "x: " << x << std::endl;
-    std::cout << "y: " << y << std::endl;
   Tower *t = new Tower(1, 100, 50, x, y);
   Waypoint *w1 = start;
   Waypoint *w2 = start->next;
@@ -58,9 +56,9 @@ void Map::addTower(int x, int y) {
 void Map::update(const float dt) {
   totalTime+=dt;
   // spawn a new enemy randomly
-  float spawnRate = 1;  // enemy per second
+  float spawnRate = 3;  // enemy per second
   float r = static_cast<double>(rand()) / RAND_MAX;
-  if (r < dt / spawnRate) {
+  if (r < dt * spawnRate) {
     Enemy* e = new Enemy(100, 300, "", this->start->next,
         this->start->x, this->start->y);
     this->enemies.push_back(e);
@@ -76,10 +74,10 @@ void Map::update(const float dt) {
       double dist =  sqrt((a * a) + (b * b));
       if (dist <= tower->range) {
           float et = totalTime - tower->lastShot;
-          std::cout << "et: " << et << std::endl;
-          if (et >= tower->firerate) {
+          if (et >= 1/tower->firerate && enemy->health > 0) {
             enemy->health = std::max(0, enemy->health - tower->damage);
             tower->lastShot = totalTime;
+            std::cout << "SHOT!" << std::endl;
           }
       }
     }
@@ -93,7 +91,8 @@ void Map::update(const float dt) {
 }
 
 Map::Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
-    Waypoint *start) : towers(towers), enemies(enemies), start(start), totalTime(0) {
+    Waypoint *start) : towers(towers), enemies(enemies), start(start),
+    totalTime(0) {
   Waypoint *curr = start;
   Waypoint *next = new Waypoint(650, 50);
   curr->next = next;
