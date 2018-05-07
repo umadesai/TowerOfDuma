@@ -78,7 +78,7 @@ GameStateTowers::GameStateTowers(Game *game) {
         this->game->grass.getTexture()->getSize().y));
   pos *= 0.5f;
   this->gameView.setCenter(pos);
-  std::vector<Tower> towers;
+  std::vector<Tower*> towers;
   std::vector<Enemy*> enemies;
   Waypoint *start = new Waypoint(0, 50);
   this->map = new Map(towers, enemies, start);

@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <algorithm>
 
 #include "../include/map.hpp"
 
@@ -25,7 +26,7 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
     int radius = 20;
     sf::CircleShape shape(radius);
     shape.setFillColor(sf::Color(255, 0, 50));  // red
-    shape.setPosition(tower.x - radius, tower.y - radius);
+    shape.setPosition(tower->x - radius, tower->y - radius);
     window->draw(shape);
   }
   for (auto enemy : this->enemies) {
@@ -38,11 +39,13 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
 }
 
 void Map::addTower(int x, int y) {
-  Tower t(0.000003, 1, 50, x, y);
+  std::cout << "x: " << x << std::endl;
+    std::cout << "y: " << y << std::endl;
+  Tower *t = new Tower(1, 100, 50, x, y);
   Waypoint *w1 = start;
   Waypoint *w2 = start->next;
   while (w2) {
-    if (!t.isLegal(w1, w2)) {
+    if (!t->isLegal(w1, w2)) {
       std::cout << "ILLEGAL TOWER" << std::endl;
       return;
     }
@@ -53,6 +56,7 @@ void Map::addTower(int x, int y) {
 }
 
 void Map::update(const float dt) {
+  totalTime+=dt;
   // spawn a new enemy randomly
   float spawnRate = 1;  // enemy per second
   float r = static_cast<double>(rand()) / RAND_MAX;
@@ -63,40 +67,23 @@ void Map::update(const float dt) {
   }
   // advance all enemies, and remove ones that have reached the end
   std::vector<Enemy*>::iterator it = enemies.begin();
-  sf::Clock newClock;
   while (it != enemies.end()) {
     Enemy *enemy = *it;
     // check for enemies in range of a tower
     for (auto tower : this->towers) {
-      double a = enemy->x - tower.x;
-      double b = enemy->y - tower.y;
+      double a = enemy->x - tower->x;
+      double b = enemy->y - tower->y;
       double dist =  sqrt((a * a) + (b * b));
-      if (dist <= tower.range) {
-        if (enemy != NULL) {
-          sf::Time elapsed = newClock.getElapsedTime();
-          float et = elapsed.asSeconds();
-          // std::cout << "firerate: " << tower.firerate << std::endl;
-          // std::cout << "et: " << et << std::endl;
-
-          // FIX THIS ---> check if enough time has elapsed since last shot
-          if (et >= tower.firerate) {
-            int health = enemy->health;
-            std::cout << "SHOT! Health: " << enemy->health << std::endl;
-            // check enemy health
-            if (health < 101) {
-              delete enemy;
-              it = this->enemies.erase(it);
-              std::cout << "Enemy destroyed!" << std::endl;
-              newClock.restart();
-            } else {
-              enemy->health = health - 20;
-              newClock.restart();
-            }
+      if (dist <= tower->range) {
+          float et = totalTime - tower->lastShot;
+          std::cout << "et: " << et << std::endl;
+          if (et >= tower->firerate) {
+            enemy->health = std::max(0, enemy->health - tower->damage);
+            tower->lastShot = totalTime;
           }
-        }
       }
     }
-    if (enemy->move(dt)) {
+    if (enemy->health == 0 || enemy->move(dt)) {
       delete enemy;
       it = this->enemies.erase(it);
     } else {
@@ -105,8 +92,8 @@ void Map::update(const float dt) {
   }
 }
 
-Map::Map(std::vector<Tower> towers, std::vector<Enemy*> enemies,
-    Waypoint *start) : towers(towers), enemies(enemies), start(start) {
+Map::Map(std::vector<Tower*> towers, std::vector<Enemy*> enemies,
+    Waypoint *start) : towers(towers), enemies(enemies), start(start), totalTime(0) {
   Waypoint *curr = start;
   Waypoint *next = new Waypoint(650, 50);
   curr->next = next;
