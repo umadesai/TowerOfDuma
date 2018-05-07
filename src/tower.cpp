@@ -19,7 +19,7 @@ Tower::~Tower()
 
 
 bool Tower::isLegal(Waypoint *w1, Waypoint *w2) {
-  int radius = 20;
+  int radius = 45;
   int dx = w2->x - w1->x;
   int dy = w2->y - w1->y;
   double distance = sqrt((dx*dx) + (dy*dy));

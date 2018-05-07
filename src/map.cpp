@@ -13,14 +13,18 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
     numWaypoints++;
   }
   curr = this->start;
-  // create VertexArray of correct size
-  sf::VertexArray lines(sf::LinesStrip, numWaypoints);
-  // draw all the waypoint lines
-  for (int i = 0; i < numWaypoints; i++) {
-    lines[i].position = sf::Vector2f(curr->x, curr->y);
+  // draw lines between waypoints and circles on waypoints
+  for (int i = 0; i < numWaypoints - 1; i++) {
+    sfLine line(sf::Vector2f(curr->x, curr->y), sf::Vector2f(curr->next->x,
+      curr->next->y), sf::Color::White, 40);
+    int radius = 20;
+    sf::CircleShape shape(radius);
+    shape.setFillColor(sf::Color::White);
+    shape.setPosition(curr->next->x - radius, curr->next->y - radius);
+    window->draw(line);
+    window->draw(shape);
     curr = curr->next;
   }
-  window->draw(lines);
 
   for (auto tower : this->towers) {
     int radius = 25;
@@ -42,7 +46,7 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
   }
   for (auto shot : this->shots) {
     sfLine line(sf::Vector2f(shot.x1, shot.y1), sf::Vector2f(shot.x2, shot.y2),
-        sf::Color::Red);
+        sf::Color::Red, 5.0f);
     window->draw(line);
   }
 }
