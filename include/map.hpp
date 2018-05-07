@@ -13,6 +13,8 @@
 class Map {
  private:
     std::vector<Tower*> towers;
+    sf::Font font;
+    int currency;
  public:
     Waypoint *start;
     float totalTime;
