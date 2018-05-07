@@ -1,4 +1,3 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "../include/game_state_towers.hpp"
@@ -39,9 +38,6 @@ void GameStateTowers::handleInput() {
     }
     case sf::Event::MouseButtonPressed: {
       if (event.mouseButton.button == sf::Mouse::Left) {
-        // print mouse click positions in pixels, absolute
-        std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-        std::cout << "mouse y: " << event.mouseButton.y << std::endl;
         int x = event.mouseButton.x;
         int y = event.mouseButton.y;
         this->map->addTower(x, y);
@@ -64,5 +60,5 @@ GameStateTowers::GameStateTowers(Game *game) {
   std::vector<Tower*> towers;
   std::vector<Enemy*> enemies;
   Waypoint *start = new Waypoint(0, 50);
-  this->map = new Map(towers, enemies, start);
+  this->map = new Map(towers, enemies, start, this->game);
 }
