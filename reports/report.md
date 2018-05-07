@@ -32,7 +32,7 @@ We were able to meet our goal of implementing a fun, engaging game in C++. It wa
   - Memory management in C++ is deceptively tricky
   - Common paradigm to stack-allocate everything
       - We didn’t do this.
-      - Every “new” statement needs a corresponding delete
+  - Every “new” statement needs a corresponding delete
   - Overhead of designing classes early helped us separate features + divide workload
 
 
