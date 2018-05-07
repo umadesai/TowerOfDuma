@@ -28,4 +28,12 @@ We worked through the first 3 steps of [this](https://www.binpress.com/tutorial/
 
 We were able to meet our goal of implementing a fun, engaging game in C++. It was difficult getting the project off the ground, and we spent a lot of time designing our classes and trying to get oriented with the SFML library. Once we became familiar, progress increased rapidly. We both feel comfortable that we could extend the game easily, or even use C++/SFML to write future C++ games, which is pretty cool.
 
+## Interesting Takeaways
+  - Memory management in C++ is deceptively tricky
+  - Common paradigm to stack-allocate everything
+      - We didn’t do this.
+      - Every “new” statement needs a corresponding delete
+  - Overhead of designing classes early helped us separate features + divide workload
+
+
 ## [Presentation Slides](https://docs.google.com/presentation/d/1T4_96v7gdm8QEz6QMjnb2r5VI_38xP8DY7j7TET2QJM/edit?usp=sharing)
