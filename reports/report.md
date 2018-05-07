@@ -1,3 +1,10 @@
+
+## Project Report for David's Tower of Duma
+
+## Team Members
+
+Uma Desai, David Abrahams
+
 ## Goal
 
 Our goal for this project was to build a fun, engaging game in C++, using the SFML graphics library.
