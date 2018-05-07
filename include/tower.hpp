@@ -1,6 +1,4 @@
 
-#include <iostream>
-#include <SFML/System.hpp>
 #include "./waypoint.hpp"
 
 #ifndef INCLUDE_TOWER_HPP_
