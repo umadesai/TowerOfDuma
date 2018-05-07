@@ -1,6 +1,7 @@
 #include "../include/sf_line.hpp"
 
-sfLine::sfLine(const sf::Vector2f& point1, const sf::Vector2f& point2, sf::Color color):
+sfLine::sfLine(const sf::Vector2f& point1, const sf::Vector2f& point2,
+    sf::Color color):
   color(color), thickness(5.f) {
     sf::Vector2f direction = point2 - point1;
     sf::Vector2f unitDirection = direction/std::sqrt(

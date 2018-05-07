@@ -5,7 +5,8 @@
 
 class sfLine : public sf::Drawable {
  public:
-    sfLine(const sf::Vector2f& point1, const sf::Vector2f& point2, sf::Color color);
+    sfLine(const sf::Vector2f& point1, const sf::Vector2f& point2,
+        sf::Color color);
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     sf::Color color;
  private:
