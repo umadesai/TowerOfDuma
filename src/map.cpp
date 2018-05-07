@@ -36,6 +36,10 @@ void Map::draw(sf::RenderWindow *window, Waypoint *start) {
     shape.setPosition(enemy->x - radius, enemy->y - radius);
     window->draw(shape);
   }
+  for (auto shot : this->shots) {
+    sfLine line(sf::Vector2f(shot.x1, shot.y1), sf::Vector2f(shot.x2, shot.y2), sf::Color::Red);
+    window->draw(line);
+  }
 }
 
 void Map::addTower(int x, int y) {
@@ -78,12 +82,24 @@ void Map::update(const float dt) {
             enemy->health = std::max(0, enemy->health - tower->damage);
             tower->lastShot = totalTime;
             std::cout << "SHOT!" << std::endl;
+            // create a new shot object
+            Shot s(tower->x, tower->y, enemy->x, enemy->y, totalTime);
+            this->shots.push_back(s);
           }
       }
     }
     if (enemy->health == 0 || enemy->move(dt)) {
       delete enemy;
       it = this->enemies.erase(it);
+    } else {
+      ++it;
+    }
+  }
+  for (std::vector<Shot>::iterator it = shots.begin();
+      it != shots.end();) {
+    Shot s = *it;
+    if (totalTime - s.timecreated >= s.lifespan) {
+      it = shots.erase(it);
     } else {
       ++it;
     }
