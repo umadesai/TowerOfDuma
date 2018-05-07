@@ -6,7 +6,5 @@ Try it for yourself! To run David's Tower of dUma, clone our repository, navigat
 
 ```
 sudo apt-get install libsfml-dev
-sudo pip install cpplint
-sudo apt install -y cppcheck
 make && ./game
 ```
