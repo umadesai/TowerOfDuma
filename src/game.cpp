@@ -9,7 +9,6 @@
 
 void Game::loadTextures() {
   texmgr.loadTexture("background", "media/allen.jpg");
-  texmgr.loadTexture("grass", "media/grass.jpg");
 }
 
 void Game::pushState(GameState *state) {
@@ -63,7 +62,6 @@ Game::Game() {
   this->window.setFramerateLimit(60);
 
   this->background.setTexture(this->texmgr.getRef("background"));
-  this->grass.setTexture(this->texmgr.getRef("grass"));
 }
 
 Game::~Game() {
